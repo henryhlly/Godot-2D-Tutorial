@@ -7,15 +7,15 @@
 radius = 45.0
 
 [node name="Player" type="RigidBody2D"]
-scale = Vector2(0.5, 0.5)
 gravity_scale = 0.0
 script = ExtResource("1_2d4o2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ip6ak")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_x2x3y")
 
 [node name="Camera2D" type="Camera2D" parent="."]
