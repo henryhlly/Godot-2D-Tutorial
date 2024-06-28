@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://7y74si5766bp"]
+[gd_scene load_steps=6 format=3 uid="uid://7y74si5766bp"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_rrtf8"]
 [ext_resource type="Texture2D" uid="uid://dsi1nxe4vo6kn" path="res://assets/textures/bg.png" id="1_smydy"]
 [ext_resource type="PackedScene" uid="uid://1uwsti2pcexb" path="res://scenes/player.tscn" id="2_oqrbq"]
-[ext_resource type="PackedScene" uid="uid://bd1l5jn4huf8h" path="res://scenes/rocket.tscn" id="3_6jcuj"]
+[ext_resource type="PackedScene" uid="uid://gx2s3scxw8rq" path="res://scenes/enemy_spawner.tscn" id="3_er3is"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu1uk"]
+size = Vector2(65, 937)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_rrtf8")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 1300.0
@@ -13,9 +18,17 @@ texture = ExtResource("1_smydy")
 stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_oqrbq")]
-position = Vector2(243, 381)
-rotation = 1.55614
+position = Vector2(118, 365)
 
-[node name="Rocket" parent="." instance=ExtResource("3_6jcuj")]
-position = Vector2(731, 383)
-rotation = -0.0337037
+[node name="EnemySpawner" parent="." instance=ExtResource("3_er3is")]
+
+[node name="Deathzone" type="Area2D" parent="."]
+position = Vector2(-121, 406)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deathzone"]
+position = Vector2(-176, -50)
+shape = SubResource("RectangleShape2D_bu1uk")
+
+[connection signal="area_entered" from="Deathzone" to="." method="_on_deathzone_area_entered"]
