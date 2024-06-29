@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
+signal took_damage
+
 var speed = 300
 var rocket_scene = preload("res://scenes/rocket.tscn")
 
 @onready var rocket_container = $RocketContainer # equivalent to get_node("RocketContainer")
+@onready var laser_sound = $LaserSound
 
 func _physics_process(_delta):
 	velocity = Vector2(0, 0)
@@ -29,4 +32,10 @@ func shoot():
 	rocket_instance.global_position = global_position
 	rocket_instance.global_position.x += 80
 	rocket_container.add_child(rocket_instance)
+	laser_sound.play()
 	
+func take_damage():
+	emit_signal("took_damage")
+	
+func die():
+	queue_free()
