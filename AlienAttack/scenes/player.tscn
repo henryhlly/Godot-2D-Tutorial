@@ -1,8 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://1uwsti2pcexb"]
+[gd_scene load_steps=10 format=3 uid="uid://1uwsti2pcexb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_27hb7"]
 [ext_resource type="Texture2D" uid="uid://blxmvvgan54nc" path="res://assets/textures/player_ship.png" id="2_pn218"]
 [ext_resource type="AudioStream" uid="uid://bo0kpeeoqyhjm" path="res://assets/audio/sfx_laser2.wav" id="3_hsgf0"]
+
+[sub_resource type="Gradient" id="Gradient_pufa2"]
+offsets = PackedFloat32Array(0, 0.557377, 1)
+colors = PackedColorArray(0.92549, 0.941176, 0.458824, 0, 0.870588, 0.796078, 0.403922, 1, 0.63, 0.1449, 0.1449, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_itj83"]
+gradient = SubResource("Gradient_pufa2")
+
+[sub_resource type="Curve" id="Curve_hvsrj"]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ow0qy"]
+curve = SubResource("Curve_hvsrj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttods"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 15, 1)
+spread = 30.0
+initial_velocity_min = -200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_ow0qy")
+color_ramp = SubResource("GradientTexture1D_itj83")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_58m1c"]
 radius = 21.0
@@ -12,6 +39,12 @@ height = 100.0
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_27hb7")
+
+[node name="FlameParticleEffect" type="GPUParticles2D" parent="."]
+position = Vector2(-41, 0)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_ttods")
+lifetime = 0.3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-7, 2.4869e-14)
