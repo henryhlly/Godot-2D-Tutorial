@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvd84oxntpoet"]
+[gd_scene load_steps=12 format=3 uid="uid://bvd84oxntpoet"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_eqpxe"]
 [ext_resource type="PackedScene" uid="uid://bcsged112ltyc" path="res://scenes/player.tscn" id="2_155c0"]
@@ -6,21 +6,22 @@
 [ext_resource type="PackedScene" uid="uid://tdnm16hg5meg" path="res://scenes/jump_pad.tscn" id="4_ei8ya"]
 [ext_resource type="PackedScene" uid="uid://ceyayfgwh68md" path="res://scenes/saw.tscn" id="5_goddj"]
 [ext_resource type="PackedScene" uid="uid://du5224v0usmne" path="res://scenes/spike_ball.tscn" id="6_hoyaf"]
+[ext_resource type="PackedScene" uid="uid://bcd8k1qlgri1y" path="res://scenes/tile_map.tscn" id="7_m1bhq"]
+[ext_resource type="PackedScene" uid="uid://cuh2brdo2roln" path="res://scenes/bg.tscn" id="8_aaacy"]
+[ext_resource type="Texture2D" uid="uid://by00wwsgrmlqg" path="res://assets/textures/bg/Brown.png" id="9_ch27a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fj2p5"]
 size = Vector2(528, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bofry"]
-size = Vector2(1080, 20)
+size = Vector2(1620, 40)
 
 [node name="Level" type="Node2D"]
 position = Vector2(588, 295)
 script = ExtResource("1_eqpxe")
 
-[node name="Player" parent="." instance=ExtResource("2_155c0")]
-
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(0, 53)
+position = Vector2(-13, -534)
 collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground"]
@@ -31,10 +32,12 @@ texture = ExtResource("3_1wxm6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("RectangleShape2D_fj2p5")
 
+[node name="Player" parent="." instance=ExtResource("2_155c0")]
+
 [node name="Deathzone" type="Area2D" parent="."]
-position = Vector2(0, 118)
-collision_layer = 2
-collision_mask = 4
+position = Vector2(232, 126)
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Deathzone"]
 shape = SubResource("RectangleShape2D_bofry")
@@ -45,23 +48,27 @@ position = Vector2(-1, -29)
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="JumpPad" parent="Objects" instance=ExtResource("4_ei8ya")]
-position = Vector2(193, 29)
+position = Vector2(198, 2)
 
 [node name="JumpPad2" parent="Objects" instance=ExtResource("4_ei8ya")]
-position = Vector2(109, 29)
+position = Vector2(121, 2)
 jump_force = 400
 
 [node name="Traps" type="Node2D" parent="."]
 
 [node name="Saw" parent="Traps" instance=ExtResource("5_goddj")]
-position = Vector2(-202, 23)
+position = Vector2(-206, -4)
 
 [node name="SpikeBall" parent="Traps" instance=ExtResource("6_hoyaf")]
-position = Vector2(-113, 25)
+position = Vector2(-251, 1)
 
 [node name="Saw2" parent="Traps" instance=ExtResource("5_goddj")]
-position = Vector2(238, -61)
+position = Vector2(260, -4)
+
+[node name="TileMap" parent="." instance=ExtResource("7_m1bhq")]
+layer_0/tile_data = PackedInt32Array(262125, 393216, 2, 262126, 458752, 2, 262127, 458752, 2, 262128, 458752, 2, 262129, 458752, 2, 262130, 458752, 2, 262131, 458752, 2, 262132, 458752, 2, 262133, 458752, 2, 262134, 458752, 2, 262135, 458752, 2, 262136, 458752, 2, 262137, 458752, 2, 262138, 458752, 2, 262139, 458752, 2, 262140, 458752, 2, 262141, 458752, 2, 262142, 458752, 2, 262143, 458752, 2, 196608, 458752, 2, 196609, 458752, 2, 196610, 458752, 2, 196611, 458752, 2, 196612, 458752, 2, 196613, 458752, 2, 196614, 458752, 2, 196615, 458752, 2, 196616, 458752, 2, 196617, 458752, 2, 196618, 458752, 2, 196619, 458752, 2, 196621, 458752, 2, 131053, 393216, 0, 196589, 393216, 1, 131054, 458752, 0, 196590, 458752, 1, 131055, 458752, 0, 196591, 458752, 1, 131056, 458752, 0, 196592, 458752, 1, 131057, 458752, 0, 196593, 458752, 1, 131058, 458752, 0, 196594, 458752, 1, 131059, 458752, 0, 196595, 458752, 1, 131060, 458752, 0, 196596, 458752, 1, 131061, 458752, 0, 196597, 458752, 1, 131062, 458752, 0, 196598, 458752, 1, 131063, 458752, 0, 196599, 458752, 1, 131064, 458752, 0, 196600, 458752, 1, 131065, 458752, 0, 196601, 458752, 1, 131066, 458752, 0, 196602, 458752, 1, 131067, 458752, 0, 196603, 458752, 1, 131068, 458752, 0, 196604, 458752, 1, 131069, 458752, 0, 196605, 458752, 1, 131070, 458752, 0, 196606, 458752, 1, 131071, 458752, 0, 196607, 458752, 1, 65536, 458752, 0, 131072, 458752, 1, 65537, 458752, 0, 131073, 458752, 1, 65538, 458752, 0, 131074, 458752, 1, 65539, 458752, 0, 131075, 458752, 1, 65540, 458752, 0, 131076, 458752, 1, 65541, 458752, 0, 131077, 458752, 1, 65542, 458752, 0, 131078, 458752, 1, 65543, 458752, 0, 131079, 458752, 1, 65544, 458752, 0, 131080, 458752, 1, 65545, 458752, 0, 131081, 458752, 1, 65546, 458752, 0, 131082, 458752, 1, 65547, 458752, 0, 131083, 458752, 1, 65548, 458752, 0, 65549, 458752, 0, 65550, 458752, 0, -327678, 1114112, 1, -327677, 1179648, 1, -327676, 1245184, 1, 196625, 458752, 2, 196624, 458752, 2, 196626, 458752, 2, 196623, 458752, 2, 131088, 458752, 1, 131087, 458752, 1, 65552, 458752, 0, 65551, 458752, 0, 131086, 458752, 1, 196622, 458752, 2, 131085, 458752, 1, 131084, 458752, 1, 196620, 458752, 2, 65553, 458752, 0, 65554, 458752, 0, 131090, 458752, 1, 131089, 458752, 1, 65555, 458752, 0, 65556, 458752, 0, 131092, 458752, 1, 131091, 458752, 1, 196627, 458752, 2, 196628, 458752, 2, -131045, 393216, 1, -65509, 393216, 1, 27, 393216, 1, 65563, 655360, 1, 131099, 458752, 1, 196635, 458752, 2, -131044, 458752, 1, -65508, 458752, 1, 28, 458752, 1, 65564, 458752, 1, 131100, 458752, 1, 196636, 458752, 2, -131043, 524288, 1, -65507, 524288, 1, 29, 524288, 1, 65565, 589824, 1, 131101, 458752, 1, 196637, 458752, 2, 65566, 458752, 0, 131102, 458752, 1, 196638, 458752, 2, 65567, 458752, 0, 131103, 458752, 1, 196639, 458752, 2, 65568, 458752, 0, 131104, 458752, 1, 196640, 458752, 2, -262117, 393216, 0, -196581, 393216, 1, -262116, 458752, 0, -196580, 458752, 1, -262115, 524288, 0, -196579, 524288, 1, -131039, 393216, 0, -65503, 393216, 1, 33, 393216, 1, 65569, 655360, 1, 131105, 458752, 1, 196641, 458752, 2, -131038, 458752, 0, -65502, 458752, 1, 34, 458752, 1, 65570, 458752, 1, 131106, 458752, 1, 196642, 458752, 2, -131037, 458752, 0, -65501, 458752, 1, 35, 458752, 1, 65571, 458752, 1, 131107, 458752, 1, 196643, 458752, 2, -327644, 393216, 0, -262108, 393216, 1, -196572, 393216, 1, -131036, 655360, 1, -65500, 458752, 1, 36, 458752, 1, 65572, 458752, 1, 131108, 458752, 1, 196644, 458752, 2, -327643, 458752, 0, -262107, 458752, 1, -196571, 458752, 1, -131035, 458752, 1, -65499, 458752, 1, 37, 458752, 1, 65573, 458752, 1, 131109, 458752, 1, 196645, 458752, 2, -327642, 524288, 0, -262106, 524288, 1, -196570, 524288, 1, -131034, 524288, 1, -65498, 524288, 1, 38, 524288, 1, 65574, 524288, 1, 131110, 524288, 1, 196646, 524288, 2, 21, 393216, 1, -65515, 393216, 1, -131051, 393216, 0, -131050, 458752, 0, -131049, 524288, 0, -65513, 524288, 1, 23, 524288, 1, -65514, 458752, 1, 22, 458752, 1, 65559, 589824, 1, 65558, 458752, 1, 65557, 655360, 1, 65560, 458752, 0, 65561, 458752, 0, 65562, 458752, 0, 131098, 458752, 1, 196634, 458752, 2, 196633, 458752, 2, 131096, 458752, 1, 131095, 458752, 1, 131094, 458752, 1, 131093, 458752, 1, 196629, 458752, 2, 196630, 458752, 2, 196631, 458752, 2, 196632, 458752, 2, 131097, 458752, 1)
+
+[node name="BG" parent="." instance=ExtResource("8_aaacy")]
+bg_texture = ExtResource("9_ch27a")
 
 [connection signal="body_entered" from="Deathzone" to="." method="_on_deathzone_body_entered"]
-[connection signal="touched_player" from="Traps/Saw" to="." method="_on_trap_touched_player"]
-[connection signal="touched_player" from="Traps/SpikeBall" to="." method="_on_trap_touched_player"]
