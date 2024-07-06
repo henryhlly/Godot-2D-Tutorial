@@ -1,0 +1,21 @@
+extends CharacterBody2D
+
+@export var gravity = 400
+@export var speed = 125
+@export var jump_force = 200
+
+@onready var animated_sprite = $AnimatedSprite2D
+
+func _physics_process(delta):
+	if is_on_floor()==false:
+		# Gravity
+		velocity.y += gravity*delta
+		if velocity.y > 500:
+			velocity.y = 500
+	
+	if Input.is_action_just_pressed("Key_Jump"):
+		velocity.y += -jump_force
+	
+	var direction = Input.get_axis("Key_Left", "Key_Right")
+	velocity.x = direction*speed
+	move_and_slide()
