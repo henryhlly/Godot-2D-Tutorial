@@ -1,24 +1,26 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvd84oxntpoet"]
+[gd_scene load_steps=15 format=3 uid="uid://bvd84oxntpoet"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_eqpxe"]
 [ext_resource type="PackedScene" uid="uid://bcsged112ltyc" path="res://scenes/player.tscn" id="2_155c0"]
+[ext_resource type="PackedScene" uid="uid://df4hnm7jnbpwq" path="res://scenes/level_2.tscn" id="2_j7o3i"]
 [ext_resource type="Texture2D" uid="uid://cfwncq0d3tld3" path="res://icon.svg" id="3_1wxm6"]
 [ext_resource type="PackedScene" uid="uid://tdnm16hg5meg" path="res://scenes/jump_pad.tscn" id="4_ei8ya"]
+[ext_resource type="PackedScene" uid="uid://dadqed7kif4k0" path="res://scenes/deathzone.tscn" id="4_uu88n"]
 [ext_resource type="PackedScene" uid="uid://ceyayfgwh68md" path="res://scenes/saw.tscn" id="5_goddj"]
 [ext_resource type="PackedScene" uid="uid://du5224v0usmne" path="res://scenes/spike_ball.tscn" id="6_hoyaf"]
 [ext_resource type="PackedScene" uid="uid://bcd8k1qlgri1y" path="res://scenes/tile_map.tscn" id="7_m1bhq"]
 [ext_resource type="PackedScene" uid="uid://cuh2brdo2roln" path="res://scenes/bg.tscn" id="8_aaacy"]
 [ext_resource type="Texture2D" uid="uid://by00wwsgrmlqg" path="res://assets/textures/bg/Brown.png" id="9_ch27a"]
+[ext_resource type="PackedScene" uid="uid://c02amjk43vymw" path="res://scenes/start.tscn" id="10_qdhen"]
+[ext_resource type="PackedScene" uid="uid://vguusqiga8mf" path="res://scenes/exit.tscn" id="11_qx34u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fj2p5"]
 size = Vector2(528, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bofry"]
-size = Vector2(1620, 40)
-
 [node name="Level" type="Node2D"]
 position = Vector2(588, 295)
 script = ExtResource("1_eqpxe")
+next_level = ExtResource("2_j7o3i")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(-13, -534)
@@ -32,18 +34,7 @@ texture = ExtResource("3_1wxm6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("RectangleShape2D_fj2p5")
 
-[node name="Player" parent="." instance=ExtResource("2_155c0")]
-
-[node name="Deathzone" type="Area2D" parent="."]
-position = Vector2(232, 126)
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Deathzone"]
-shape = SubResource("RectangleShape2D_bofry")
-
-[node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(-1, -29)
+[node name="Deathzone" parent="." instance=ExtResource("4_uu88n")]
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -71,4 +62,10 @@ layer_0/tile_data = PackedInt32Array(262125, 393216, 2, 262126, 458752, 2, 26212
 [node name="BG" parent="." instance=ExtResource("8_aaacy")]
 bg_texture = ExtResource("9_ch27a")
 
-[connection signal="body_entered" from="Deathzone" to="." method="_on_deathzone_body_entered"]
+[node name="Start" parent="." instance=ExtResource("10_qdhen")]
+position = Vector2(-136, -16)
+
+[node name="Exit" parent="." instance=ExtResource("11_qx34u")]
+position = Vector2(601, -112)
+
+[node name="Player" parent="." instance=ExtResource("2_155c0")]
