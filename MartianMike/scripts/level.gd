@@ -63,6 +63,7 @@ func _on_trap_touched_player():
 	reset_player()
 
 func reset_player():
+	AudioPlayer.play_sfx("hurt")
 	player.velocity = Vector2.ZERO
 	player.global_position = start.get_spawn_pos()
 	time_left = level_time
